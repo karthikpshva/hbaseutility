@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.alpha</groupId>
+	<artifactId>hbaseutility</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>hbaseutility</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>apache</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>hadoop.dist</name>
+					<value>apache</value>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>apache-hadoop</id>
+					<url>http://mvnrepository.com/artifact/org.apache.hadoop</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+				<repository>
+					<id>apache-hbase</id>
+					<url>http://mvnrepository.com/artifact/org.apache.hbase</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+			</repositories>
+			<properties>
+				<hadoop.version>2.2.0</hadoop.version>
+				<hbase.version>0.94.10</hbase.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>cdh</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>hadoop.dist</name>
+					<value>cdh</value>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>cloudera-releases</id>
+					<url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<properties>
+				<hadoop.version>2.0.0-cdh4.3.1</hadoop.version>
+				<hbase.version>0.94.6-cdh4.3.1</hbase.version>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+	</dependencies>
+</project>
