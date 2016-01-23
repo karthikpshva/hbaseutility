@@ -107,5 +107,6 @@ public class StatusUtil {
 			System.exit(-1);
 		}
 		getStatus(tablename);
+		hbaseAdmin.close();
 	}
 }
